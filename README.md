@@ -107,7 +107,7 @@ sin embargo con una complejidad
 En este caso los parametros pasan de ser fijos obligatorios, a ser **Dinamicos** y determinantes para elegir que procedimiento realizar.
 Cómo estrategía para resolver está oportunidad, se desarrollo el siguiente código: 
 
-![Instanciación dinámica](docs/ex_1/Clases-y-Parametros.png)
+![Instanciación dinámica](docs/ex_1/Clases%20y%20Parametros.png)
 
 ### Analisis de código 🧐❓
 
