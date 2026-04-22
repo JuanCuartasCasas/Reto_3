@@ -1,176 +1,177 @@
-# Reto 3: Herencia vs Composición : 🧔 - > 🧑‍🦱
->El siguiente repositorio hace parte de la entrega del reto 3 donde se demuestra la utilidad de la herencia y composición en 
->contextos prácticos, uso de herencia para especificar y extender funciones y uso de objetos cómo parametros
+# Reto 3: Herencia vs. Composición: 🧔 -> 🧑‍🦱
+
+> El siguiente repositorio hace parte de la entrega del Reto 3, donde se demuestra la utilidad de la herencia y la composición en
+> contextos prácticos: uso de herencia para especificar y extender funciones, y uso de objetos como parámetros.
 
 ## Tabla de contenidos ✔️
-- [Parte 1: Geometrías Básicas](#geometrías-basicas-)
-   - [Clase punto y Linea]()
-   - [ Rectangulo y Cuadrado]()
-     - [Diversidad de parametros]()
-- [Parte 2: Restaurante]()
-   - [Abstracción de elementos]()
-   - [Clase Orden]()
-   - [Menu Interactivo]()
-- [Observaciones]()
-- [Referencias]()
-  
----
 
-Una vez comprendido cómo funciona el paradigma orientado a objetos, se busca aplicar sus pilares fundamentales
-a partir de problemas que los evidencien en contextos cotidianos.
-- Inicialmente, se propone concebir geometrías simples a partir de la *Abstracción* de lineas y rectangulos en un plano cartesíano,
-donde podremos obtener cualquiera de estos y relacionarlos entre ellos.
-- Más adelante, se aplicarán los pilares a partir de un contexto de restaurante cotidiano, donde deberemos tomar una orden a partir 
-de un menu, y socializar un costo.
+- [Parte 1: Geometrías básicas](#geometrias-basicas)
+  - [Formación del plano cartesiano (clase Point)](#formacion-del-plano-cartesiano-clase-point)
+  - [Clase Line](#clase-line)
+  - [Cuadrados y rectángulos](#cuadrados-y-rectangulos)
+    - [Análisis de código (parámetros dinámicos)](#analisis-de-codigo-parametros-dinamicos)
+    - [Métodos de inicialización](#metodos-de-inicializacion)
+    - [Caso: inicialización por líneas](#caso-inicializacion-por-lineas)
+    - [Prueba piloto](#prueba-piloto)
+- [Parte 2: Restaurante](parte_2.md)
+  - [Abstracción de elementos](parte_2.md#abstraccion-de-elementos)
+  - [Clase Order](parte_2.md#clase-order)
+  - [Menú interactivo](parte_2.md#menu-interactivo)
 
-Evidenciamos a partir de estos el uso de la **Abstracción** cómo medida para transformar elementos de la vida real en objetos
-códificables por la computadora; de la **Herencia** y **Composición** en la generación de clases y métodos que pertenezcan y se
-relacionen entre *superclases*
 
 ---
 
-## Geometrías Basicas 📐 
-  A partir de este ejercicio se busca formular una clase Rectangulo, capaz de inicializarse a partir de diferentes métodos;
-  generar una subclase cuadrado y evaluar si un punto dado se encuentra en el interior o no de estos
+Una vez comprendido cómo funciona el paradigma orientado a objetos, se busca aplicar sus pilares fundamentales a partir de problemas que
+los evidencien en contextos cotidianos.
 
-### Formación plano cartesiano: 📋
+- Inicialmente, se propone concebir geometrías simples a partir de la *abstracción* de líneas y rectángulos en un plano cartesiano,
+  donde podremos obtener cualquiera de estos y relacionarlos entre ellos.
+- Más adelante, se aplicarán los pilares a partir de un contexto de restaurante cotidiano, donde deberemos tomar una orden a partir
+  de un menú y calcular un costo.
 
-Para formar cualquier geometría debemos partir de alguna referencia, un "campo de juego" donde podramos generar y manipularlas bajo diferentes parametros.
+Evidenciamos a partir de estos el uso de la **abstracción** como medida para transformar elementos de la vida real en objetos
+codificables por la computadora; y el uso de **herencia** y **composición** en la generación de clases y métodos que pertenezcan y se
+relacionen entre *superclases*.
 
-Cómo objeto que nos capacitará para poder crear cualquier geometría, se genero la clase **Point** con las coordenadas (x,y) cómo atributos asignables,
-permitiendo asi *abstraer* un plano cartesiano al colocar cualquier numero real cómo parametro de estos.
+---
+
+## Geometrias basicas
+
+A partir de este ejercicio se busca formular una clase `Rectangle`, capaz de inicializarse a partir de diferentes métodos;
+generar una subclase `Square` y evaluar si un punto dado se encuentra en el interior o no de estos.
+
+### Formacion del plano cartesiano (clase Point)
+
+Para formar cualquier geometría debemos partir de alguna referencia: un “campo de juego” donde podamos generarlas y manipularlas bajo
+diferentes parámetros.
+
+Como objeto que nos capacitará para poder crear cualquier geometría, se generó la clase **Point** con las coordenadas `(x, y)` como
+atributos asignables, permitiendo así *abstraer* un plano cartesiano al colocar cualquier número real como parámetro.
 
 ```python
-
 class Point:
-   def __init__(self, x:float, y:float):
-         self.x = X
-         self.y = y
+    def __init__(self, x: float, y: float):
+        self.x = x
+        self.y = y
 ```
 
-Cualquier instanciación de un punto tomara unas coordenadas en las cuales esté se encontrara, de forma que a partir de varios puntos tomamos parametros para formar una geometría.
+Cualquier instanciación de un punto tomará unas coordenadas en las cuales este se encontrará, de forma que a partir de varios puntos
+tomamos parámetros para formar una geometría.
 
 ---
 
-### Clase Linea 📏
+### Clase Line
 
-Inicialmente, a partir de dos puntos podemos formar una linea unica cuyos extremos son estos puntos,  
-cuyas características son las siguientes:
+Inicialmente, a partir de dos puntos podemos formar una línea única cuyos extremos son estos puntos, cuyas características son:
 
-| Linea    | Características |
-| -------- | --------------- |
+| Línea     | Características |
+|----------|------------------|
 | Pendiente | $m = \frac{y_2-y_1}{x_2-x_1}$ |
-| Longitud | $\mathbf{L} = \sqrt{(x_2-x_1)^2+(y_2-y_1)^2}$ |
+| Longitud  | $\mathbf{L} = \sqrt{(x_2-x_1)^2+(y_2-y_1)^2}$ |
 
-Por lo que la inicialización de cuaquier linea se realiza de la siguiente forma: 
-
-```python
-Class Line:
-   def __init__(self, start:Point, end:Point):
-      self.start = start
-      self.end = end
-      self.length = self.compute_length(start, end)
-      slef.slope = self.compute_slope(start, end)
-```
-Demostrando la Composición de los objetos *Point* usados cómo parametros para la formación de la clase **Line**
-Además observamos la formación de atributos directamente a partir de métodos inicializados en la instanciación
+Por lo que la inicialización de cualquier línea se realiza de la siguiente forma:
 
 ```python
- def compute_length(self, start: Point, end: Point) -> float:
-        length = ((end.x - start.x)**2 + (end.y - start.y)**2)**0.5
-        return length
-
-    def compute_slope(self, start: Point, end: Point) -> float:
-        if end.x - start.x == 0:
-            raise ValueError("La pendiente es indefinida para líneas verticales.")
-        slope = (end.y - start.y) / (end.x - start.x)
-        return slope
+class Line:
+    def __init__(self, start: Point, end: Point):
+        self.start = start
+        self.end = end
+        self.length = self.compute_length(start, end)
+        self.slope = self.compute_slope(start, end)
 ```
 
-se logra observar la conversión de las formulas matemáticas usadas cómo algoritmos para formar un nuevo valor, y se desarrollaron dós metódos más para validad si la linea 
-cruza por el eje x y por el eje y del plano
+Demostrando la composición de los objetos `Point` usados como parámetros para la formación de la clase **Line**.
+Además observamos la formación de atributos directamente a partir de métodos invocados en la instanciación.
+
+```python
+def compute_length(self, start: Point, end: Point) -> float:
+    length = ((end.x - start.x) ** 2 + (end.y - start.y) ** 2) ** 0.5
+    return length
+
+def compute_slope(self, start: Point, end: Point) -> float:
+    if end.x - start.x == 0:
+        raise ValueError("La pendiente es indefinida para líneas verticales.")
+    slope = (end.y - start.y) / (end.x - start.x)
+    return slope
+```
+
+Se logra observar la conversión de las fórmulas matemáticas usadas como algoritmos para formar un nuevo valor. Además, se desarrollaron
+dos métodos más para validar si la línea cruza por el eje X y por el eje Y del plano.
 
 ![validar_cruce](docs/ex_1/Cruces_Line.png)
 
-Para validar si la linea interseca sobre los ejes, evaluamos si los puntos de inicio y fin se encuentran en cuadrantes opuestos, donde por lo tanto cruzara sobre el eje definido
+Para validar si la línea interseca sobre los ejes, evaluamos si los puntos de inicio y fin se encuentran en cuadrantes opuestos; por lo
+tanto cruzará sobre el eje definido.
 
 ---
 
-### CUadrados Y Rectangulos
+### Cuadrados y rectangulos
 
-**U**na vez habituados a la formación de objetos a partir de otros objetos, formaremos geometrías más avanzadas cómo rectangulos y cuadrados,
-sin embargo con una complejidad
+Una vez habituados a la formación de objetos a partir de otros objetos, formaremos geometrías más avanzadas como rectángulos y cuadrados,
+sin embargo con una complejidad:
 
-- Uso de parametros dinámicos: En tóda función que requiere diferentes variables de entrada, se definen paraetros obligatorios que deben añadirse para ejecutar la función,
-  Sin embargo existe la posibilidad de realizar diferentes procedimientos a partir de los parametros que se nos proveen.
-  
-En este caso los parametros pasan de ser fijos obligatorios, a ser **Dinamicos** y determinantes para elegir que procedimiento realizar.
-Cómo estrategía para resolver está oportunidad, se desarrollo el siguiente código: 
+- **Uso de parámetros dinámicos**: en toda función que requiere diferentes variables de entrada, se definen parámetros obligatorios.
+  Sin embargo, existe la posibilidad de realizar diferentes procedimientos a partir de los parámetros que se nos proveen.
+
+En este caso, los parámetros pasan de ser fijos obligatorios a ser **dinámicos** y determinantes para elegir qué procedimiento realizar.
+Como estrategia para resolver esta oportunidad, se desarrolló el siguiente código:
 
 ![Instanciación dinámica](docs/ex_1/Clases%20y%20Parametros.png)
 
-### Analisis de código 🧐❓
+#### Analisis de codigo (parametros dinamicos)
 
 | Valores | Uso |
-|---------|-----|
-|```*```  | agrupador de argumentos, busca realizar una tupla o un dict con los elementos en un orden|
-|```isinstance(p,Class) for p in ...``` | valida si existe una instancia específica y recorre una tupla validando cada iteración |
-| ```all()``` | Operador lógico que controla si todos los objetos de una tupla cumplen alguna condición |
-|```.issubset(kwargs.key())``` | controla si un subconjunto o lista hace parte de otro conjunto |
-|```# type: ignore ```| comentario especial que omite la validación de verificadores de tipos, evitando que los tipos se encuentren inicializados primeramente |
+|--------|-----|
+| `*`  | Agrupador de argumentos: permite construir una tupla con argumentos posicionales. |
+| `**` | Agrupador para argumentos nombrados: permite construir un diccionario `clave: valor`. |
+| `isinstance(p, Class) for p in ...` | Recorre una tupla validando si cada elemento es instancia de una clase. |
+| `all()` | Operador lógico que valida si todas las condiciones en un iterable se cumplen. |
+| `.issubset(kwargs.keys())` | Valida si un conjunto de claves está contenido dentro de las claves de `kwargs`. |
+| `# type: ignore` | Comentario para omitir validación de tipos en chequeadores estáticos (p. ej. mypy). |
 
-El Código forma la plantilla para generar un rectangulo basandose en un numero variable de parametros con un orden definido, en este caso:
+El código forma la plantilla para generar un rectángulo basándose en un número variable de parámetros con un orden definido, en este caso:
 
-- Inicialización de un cuadrado a partir de sus puntos extremos, requiere de la clase *Point*
-- A partir de su punto más inferior junto con su ancho y altura
-- Iniciar a partir de su punto central, su ancho y su alto
+- Inicialización de un cuadrado a partir de sus puntos extremos (requiere objetos `Point`).
+- Inicialización a partir de su punto más inferior junto con su ancho y altura.
+- Inicialización a partir de su punto central, su ancho y su alto.
 
-A partir de estás necesidades, se realizarón diversas estrategias para decidir cómo ejecutar procesos diferentes seguno los parametros que se nos provean.
+A partir de estas necesidades, se realizaron diversas estrategias para decidir cómo ejecutar procesos diferentes según los parámetros que
+se provean.
 
-   - **1**: Sabiendose que la cantidad de parametros variará, primero debemos agrupar los parametros de forma que tengamos una referencia para su posterior evaluación
-     - En este caso se hizo uso del ` *args, **kwargs `, donde args, kwargs serán las variables para ordenar los parametros y * será un agrupador por tuplas de estós,
-           kwargs utilizar ** debido a que buscamos empaquetar una relación clave : valor, por lo que requiere dos agrupaciones
+1. Como la cantidad de parámetros variará, primero debemos agruparlos para tener una referencia para su posterior evaluación.
+   - Se hace uso de `*args, **kwargs`.
+   - **Precaución**: al llamar la función, evita mezclar posicionales y nombrados de forma ambigua.
+     - Ejemplo incorrecto: `Rectangle(punto1, center=punto, width=5)`
 
-     - :warning: **Precaución**, al llamar la función, no se podrán utilizar ambos tipos de argumentos debido a que será confuso mezclar posiciones y llaves
-            `Rectangle(punto1, center=punto, width5)` :heavy_multiplication_x:
-   - **2**: Una vez empaquetados los parametros, debemos detectar qué tipo de inicialización surgió, esto se realiza a partir de controladores `if-else` que validan si una lista o posición
-     posee un tipo específico, de forma que caracteriza cuál llamada será con respecto a los tipos de los parametros llamados
-      - Uso de `isinstance(p,Point) for p in args` donde una vez empaquetados los parametros en tuplas, recorre cada posción validando si cada uno *es instancia* de la clase Point
-      - Uso de `{"center", "width", "height"}.ìssubset(kwargs.key()` donde a partir de las claves del diccionario kwargs, valida si TODOS los parametros propuestos se encuentran en las claves
-         de kwargs
+2. Una vez empaquetados, detectamos qué tipo de inicialización surgió usando controladores `if/elif/else`:
+   - `isinstance(p, Point) for p in args`
+   - `{"center", "width", "height"}.issubset(kwargs.keys())`
 
-   En este caso se valida en un principio si es una tupla *args con diferentes condiciones posicionales, y si es un dictionario **kwargs con las claves requeridas. Una vez identificados sus       
-   parametros, se redireccionarán a diferentes métodos de inicialización
+En este caso se valida si se trata de una tupla `args` con condiciones posicionales o un diccionario `kwargs` con las claves requeridas.
+Una vez identificados sus parámetros, se redirige a diferentes métodos de inicialización.
 
-
-### Métodos de inicialización:
-   ![Métodos Inicializacdos](docs/ex_1/Metodos_Inicialización.png)
-
-   Con respecto a los tipos de paramateros y su cantidad, la realización de uno de los métodos se llevará a cabo.
-   
-#### Caso de inicialización por lineas:
-
-   Cómo requerimiento más complejo, se solicita realizar un método de inicialización de la clase rectangulo a partir de objetos lineas que lo conformen.
-   Se observa la aplicación directa de la composición, pues un rectangulo se compondría de lineas compuestas por puntos, formando una jerarquia de ejecución donde indispensablemente
-   encontraríamos puntos para inicalizar
-   
-   ![Inicialización por lineas](docs/ex_1/Init_por_lineas.png)
-
-   En este caso la forma de validar surge de que un punto debe contener dos inicios o fines de lineas.
-
-   Se conforma el cuadrado identificando las aristas de sus extremos a partir del minimo punto inicial de todas las lineas, al igual que el final.
-   
 ---
-### Prueba Piloto
+
+#### Metodos de inicializacion
+
+![Métodos Inicialización](docs/ex_1/Metodos_Inicialización.png)
+
+Con respecto a los tipos de parámetros y su cantidad, se ejecutará uno de los métodos.
+
+---
+
+#### Caso: inicializacion por lineas
+
+Como requerimiento más complejo, se solicita un método de inicialización de la clase rectángulo a partir de objetos `Line` que lo conformen.
+Se observa la aplicación directa de la composición: un rectángulo se compone de líneas compuestas por
+
+---
+
+#### Prueba piloto
 
 Una vez realizada la plantilla de los objetos, se realizan las funciones requeridas a partir de métodos construidos en cada constructor.
 
-![Prueba  Piloto](docs/ex_1/Prueba.png)
-
-
-   
-   
-
+![Prueba Piloto](docs/ex_1/Prueba.png)
 
 
 
