@@ -133,11 +133,42 @@ A partir de estás necesidades, se realizarón diversas estrategias para decidir
 
      - :warning: **Precaución**, al llamar la función, no se podrán utilizar ambos tipos de argumentos debido a que será confuso mezclar posiciones y llaves
             `Rectangle(punto1, center=punto, width5)` :heavy_multiplication_x:
-   - **2**: Una vez empaquetados los parametros, debemos detectar qué tipo de inicialización surgió, esto se realiza a partir de controladores `if-else` que validan si una lista o posición          posee un tipo específico, de forma que caracteriza cuál llamada será con respecto a los tipos de los parametros llamados
+   - **2**: Una vez empaquetados los parametros, debemos detectar qué tipo de inicialización surgió, esto se realiza a partir de controladores `if-else` que validan si una lista o posición
+     posee un tipo específico, de forma que caracteriza cuál llamada será con respecto a los tipos de los parametros llamados
       - Uso de `isinstance(p,Point) for p in args` donde una vez empaquetados los parametros en tuplas, recorre cada posción validando si cada uno *es instancia* de la clase Point
-      - Uso de `{"center", "width", "height"}.ìssubset(kwargs.key()` donde a partir de las claves del diccionario kwargs, valida si TODOS los parametros propuestos se encuentran en las claves          de kwargs
+      - Uso de `{"center", "width", "height"}.ìssubset(kwargs.key()` donde a partir de las claves del diccionario kwargs, valida si TODOS los parametros propuestos se encuentran en las claves
+         de kwargs
 
-   En este caso se valida en un principio si es una tupla *args con diferentes condiciones posicionales, y si es un dictionario **kwargs con las claves requeridas. Una vez identificados sus        parametros, se redireccionarán a diferentes métodos de inicialización
+   En este caso se valida en un principio si es una tupla *args con diferentes condiciones posicionales, y si es un dictionario **kwargs con las claves requeridas. Una vez identificados sus       
+   parametros, se redireccionarán a diferentes métodos de inicialización
+
+
+### Métodos de inicialización:
+   ![Métodos Inicializacdos](docs/ex_1/Metodos_Inicialización.png)
+
+   Con respecto a los tipos de paramateros y su cantidad, la realización de uno de los métodos se llevará a cabo.
+   
+#### Caso de inicialización por lineas:
+
+   Cómo requerimiento más complejo, se solicita realizar un método de inicialización de la clase rectangulo a partir de objetos lineas que lo conformen.
+   Se observa la aplicación directa de la composición, pues un rectangulo se compondría de lineas compuestas por puntos, formando una jerarquia de ejecución donde indispensablemente
+   encontraríamos puntos para inicalizar
+   
+   ![Inicialización por lineas](docs/ex_1/Init_por_lineas.png)
+
+   En este caso la forma de validar surge de que un punto debe contener dos inicios o fines de lineas.
+
+   Se conforma el cuadrado identificando las aristas de sus extremos a partir del minimo punto inicial de todas las lineas, al igual que el final.
+   
+---
+### Prueba Piloto
+
+Una vez realizada la plantilla de los objetos, se realizan las funciones requeridas a partir de métodos construidos en cada constructor.
+
+![Prueba  Piloto](docs/ex_1/Prueba.png)
+
+
+   
    
 
 
