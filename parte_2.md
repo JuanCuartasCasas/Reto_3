@@ -8,7 +8,7 @@ Se demuestran los siguientes conceptos aplicados:
 - **Herencia**: Interacción de código entre un ítem de un menú y clasificaciones específicas (por ejemplo: `MainCourse`, `Beverage`, `Dessert`, etc.).
 - **Composición**: Uso de una **Order** como parámetro/objeto que habilita funcionalidades como calcular totales, aplicar descuentos, etc.
 
-## Tabla de contenidos_
+## Tabla de contenidos
 
 - [Abstracción de elementos](#abstraccion-de-elementos)
   - [Clase Order](#clase-order)
